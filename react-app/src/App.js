@@ -1,4 +1,4 @@
-import MainComponent from "./Loan-calculator/MainComponent";
+import MainComponent from "./Tasklist-component/MainComponent";
 
 function App() {
   return (
