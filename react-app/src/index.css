@@ -1,0 +1,20 @@
+.input{
+  width: 50rem;
+  height: 38px;
+  margin-top: 1px;
+  margin-right: 0px;
+  
+}
+
+.bttn{
+  height: 40px;
+  width: 38px;
+  background: darkorange;
+ margin-right: 10px;
+}
+
+.con{
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+}

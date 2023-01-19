@@ -1,34 +1,45 @@
-
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from "./Github-Finder/Navbar";
 import Users from "./Github-Finder/Users";
-import React, {Component} from 'react' 
-import axios from 'axios'
+import React, { Fragment, } from 'react' 
+
+import { GithubProvider }  from './context/GithubContext.js';
 import Search from "./Github-Finder/Search";
- class App extends Component {
- state={
-  users: [],
-  loading: false
- }
+import Alert from "./Github-Finder/Alert";
+import About from './Github-Finder/pages/About';
+import User from './Github-Finder/User'
 
-  async  componentDidMount(){
-    console.log(process.env.REACT_APP_GITHUB_CLIENT_SECRET)
-    this.setState({loading: true})
- const res = await axios.get(`
- https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
- this.setState({users: res.data, loading: false})
-}
+ const App = () => {
+// const {SearchUsers}=useContext(GithubContext)
 
 
-  render(){
+
   return (
+    <GithubProvider>
+    <Router>
+    
     <div >
+      
     <Navbar name={'Github Finder'} font={<i className="fab fa-github px-2"/>}/>
      <div className='container'>
-     <Search/>
-    <Users users={this.state.users} loading={this.state.loading}/>
+      <Alert/>
+    <Routes>
+        <Route path='/' element={(
+          <Fragment>
+  <Search/>
+    <Users/>
+         </Fragment>
+        )}/>
+
+        <Route path="/about" element={<About/>} />
+        <Route path='user/:login' element={<User/>}/>
+     </Routes>
+   
     </div>
     </div>
-  );
-}
+    
+    </Router>
+    </GithubProvider>
+ );
 }
 export default App;
