@@ -4,6 +4,9 @@ import { useContext,} from 'react'
 import GithubContext from '../context/GithubContext'
 import Spinner from '../layout/Spinner'
 const UserResult = () => {
+
+
+
   const {users, loading,}=useContext(GithubContext)
 
 

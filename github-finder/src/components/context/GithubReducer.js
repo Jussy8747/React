@@ -1,8 +1,10 @@
-export const iniatialState={
+ export  const iniatialState={
 users: [],
 loading: false,
 text: '',
-showClear: false
+showClear: false,
+user: [],
+repos: []
 }
 
 const reducer=(state, action)=>{
@@ -13,6 +15,13 @@ switch (action.type) {
         users: action.payload,
         loading: false
     }
+     case 'REPOS':
+      return{
+        ...state,
+        repos: action.payload,
+        loading: false
+      }
+   
     case 'LOADING':
       return{
         loading: true
@@ -32,7 +41,7 @@ switch (action.type) {
     case 'CLEAR':
       return{
         ...state,
-        users: [],
+        users: action.payload,
         showClear: false
       }  
   
@@ -41,7 +50,12 @@ switch (action.type) {
         ...state,
          showClear: true
       }
-
+    case 'SET_USER':
+      return{
+        ...state,
+        user: action.payload,
+        loading: false
+      }
   default:
    return state
 }

@@ -1,9 +1,12 @@
 import React from 'react'
-import { useContext } from 'react'
+import { useContext, } from 'react'
 import GithubContext from '../context/GithubContext'
+
+
 const UserSearch = () => {
 
-  const {Clear, users,showClear, handleSubmit, Change, text} = useContext(GithubContext)
+  const {Clear, showClear, handleSubmit, Change, text} = useContext(GithubContext)
+ 
   return  (
     <div className='grid grid-cols-1 xl:gird-cols-2 lg:grid-cols-2
     md:grid-cols-2 gap-8 mb-8'>

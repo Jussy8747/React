@@ -1,12 +1,12 @@
-import {createContext, useReducer, useEffect} from 'react'
+import {createContext, useReducer, useContext} from 'react'
 import reducer, {iniatialState} from './GithubReducer'
-
+import AlertContext from './alert/AlertContext'
 
 const GithubContext = createContext()
 
 export const  GithubProvider = ({children}) =>{
   const [state, dispatch] = useReducer(reducer, iniatialState)
-
+ const {setAlert} = useContext(AlertContext)
   const SearchUsers = async (test) =>{
     const params = new URLSearchParams({
       q: test
@@ -20,9 +20,23 @@ export const  GithubProvider = ({children}) =>{
     })
     const {items} = await res.json()
     dispatch({type: 'SET_USERS', payload: items})
-    console.log(items)
   }
 
+const getRepos = async (login) =>{
+   
+    setloading()
+    const res = await fetch(`
+    ${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`, {
+      headers:{
+        Authorization: `${process.env.REACT_APP_GITHUB_CLIENT_TOKEN}`
+      }
+    })
+    const data = await res.json()
+    dispatch({type: 'REPOS', payload: data})
+    console.log(data)
+  }
+
+   
   const setloading = ()=>{
     dispatch({type: 'LOADING'})
   }
@@ -37,7 +51,7 @@ export const  GithubProvider = ({children}) =>{
   const handleSubmit=(e)=>{
     e.preventDefault()
     if(state.text === ''){
-      alert('please enter something')
+      setAlert('please enter something', 'error')
     }else{
       SearchUsers(state.text)
       dispatch({type: 'SHOWCLEAR'})
@@ -57,6 +71,8 @@ return <GithubContext.Provider value={{
   Change,
   handleSubmit,
   SearchUsers,
+  getRepos,
+  repos: state.repos,
   showClear: state.showClear
   
 }}>
