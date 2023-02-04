@@ -1,46 +1,27 @@
 import React from 'react'
 import RepoList from '../components/repos/RepoList'
-import { useEffect, useContext, useState} from 'react'
-// import GithubContext from '../components/context/GithubContext'
+import { useEffect, useContext,} from 'react'
 import { useParams } from 'react-router-dom'
 import UserContext from '../components/context/user/UserContext'
 import Spinner from '../components/layout/Spinner'
 import {FaCodepen, FaStore, FaUsers, FaUserFriends} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import repoContext from '../components/repos/RepoContext'
-import GithubContext from '../components/context/GithubContext'
-import { useReducer } from 'react'
+
+
 const User = () => {
 
   const { getUser, user, loading}=useContext(UserContext)
-  // const {getRepos, repos}=useContext(GithubContext)
-  const [repos, setRepos]=useState([{name: 3},{name: 2}])
-
-
-const getRepos = async () =>{
-   
-    const res = await fetch(`
-    ${process.env.REACT_APP_GITHUB_URL}/users`, {
-      headers:{
-        Authorization: `${process.env.REACT_APP_GITHUB_CLIENT_TOKEN}`
-      }
-    })
-    const data = await res.json()
-   
-
-   console.log(data)
-  }
+  const {getRepos, repos}=useContext(repoContext)
   
 const params = useParams()
 
   useEffect(()=>{
-
 getUser(params.login)
+getRepos(params.login)
+//eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])
 
-getRepos()
-
-console.log(repos)
-},[])
  
 if(loading){
   return <Spinner/>
@@ -184,8 +165,7 @@ if(loading){
           </div>
         </div>
        </div>
-      <RepoList repos={repos}/>
-      
+    <RepoList repos={repos}/>
     </div>
     </>
   )

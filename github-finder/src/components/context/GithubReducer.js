@@ -4,7 +4,7 @@ loading: false,
 text: '',
 showClear: false,
 user: [],
-repos: []
+repo: []
 }
 
 const reducer=(state, action)=>{
@@ -25,6 +25,10 @@ switch (action.type) {
     case 'LOADING':
       return{
         loading: true
+      }
+    case 'LOAD':
+      return{
+        loading: false
       }
     case 'CHANGE':
       return{

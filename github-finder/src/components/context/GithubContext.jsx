@@ -1,12 +1,15 @@
 import {createContext, useReducer, useContext} from 'react'
 import reducer, {iniatialState} from './GithubReducer'
 import AlertContext from './alert/AlertContext'
+import axios from 'axios'
+import { useState } from 'react'
 
 const GithubContext = createContext()
 
 export const  GithubProvider = ({children}) =>{
   const [state, dispatch] = useReducer(reducer, iniatialState)
  const {setAlert} = useContext(AlertContext)
+
   const SearchUsers = async (test) =>{
     const params = new URLSearchParams({
       q: test
@@ -20,25 +23,17 @@ export const  GithubProvider = ({children}) =>{
     })
     const {items} = await res.json()
     dispatch({type: 'SET_USERS', payload: items})
+   
   }
 
-const getRepos = async (login) =>{
-   
-    setloading()
-    const res = await fetch(`
-    ${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`, {
-      headers:{
-        Authorization: `${process.env.REACT_APP_GITHUB_CLIENT_TOKEN}`
-      }
-    })
-    const data = await res.json()
-    dispatch({type: 'REPOS', payload: data})
-    console.log(data)
-  }
+
 
    
   const setloading = ()=>{
     dispatch({type: 'LOADING'})
+  }
+  const load = ()=>{
+    dispatch({type: 'LOAD'})
   }
 
   const Change = (e)=>{
@@ -63,17 +58,14 @@ const getRepos = async (login) =>{
   const Clear = ()=>{dispatch({type: 'CLEAR'})}
 
 return <GithubContext.Provider value={{
-  users: state.users,
-  loading: state.loading,
-  text: state.text,
+ ...state,
   Clear,
   setloading,
   Change,
+  load,
   handleSubmit,
   SearchUsers,
-  getRepos,
-  repos: state.repos,
-  showClear: state.showClear
+  
   
 }}>
 {children}
