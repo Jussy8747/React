@@ -17,7 +17,7 @@ const Profile = () => {
     useEffect(() => {
       getProfiles()
       window.localStorage.setItem('profiles', JSON.stringify(profiles))
-      console.log(profiles);
+    
     }, [profileName])
 
     const handleNav =(name) =>{
@@ -76,7 +76,7 @@ const Profile = () => {
               {profiles && profiles.map(item =>(
                 <div className='mt-4 text-gray-500 hover:text-gray-200 ' key={item.name} >
                   <div className=' hover:bg-gray-400 mx-4 mb-1'>
-                  <img className="hover:border-2 rounded w-24 h-24 object-contain"
+                  <img className="hover:border-2 rounded  h-44 w-44 object-contain"
                   src={item.img} alt="" onClick={()=>{
                     handleNav(item.name)
                     nav(`${item.name}` == 'Kids' ? '/kids' : '/mainpage')
@@ -90,7 +90,7 @@ const Profile = () => {
               <div  onClick={() =>{
               setAddProfle(true)
             }} className='hover:bg-gray-400 flex justify-center
-            items-center w-24 h-24 mt-4 mx-4 mb-1 '>
+            items-center mt-4 mx-4 mb-1 h-44 w-44'>
               <FaPlusCircle className='w-16 h-16 object-fill'/>
             </div>
             <p className='font-medium'>Add Profile</p>

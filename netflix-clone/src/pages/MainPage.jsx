@@ -2,15 +2,15 @@ import { useContext } from "react"
 import Banner from "../components/Banner"
 import Navbar from "../components/Navbar"
 import Slides from "../components/Slides"
-import MainContext from "../context/MainContext"
+
 import mainpageContext from "../context/MainPageContext"
 import Search from "../components/Search"
 const MainPage = () => {
 
-  const {loading} = useContext(MainContext)
+
   const API_KEY = import.meta.env.VITE_API_KEY
   const Request = {
-      fetchTrending: `/trending/all/day?api_key=${API_KEY}&language=en-US`,
+      fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
       fetchNetflixOriginal: `/discover/tv?api_key=${API_KEY}&with_network=213`,
       fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
       fetchNewReleaseMovie: `/movie/now_playing?api_key=${API_KEY}&language=en-us`,
@@ -56,12 +56,12 @@ const MainPage = () => {
       <Slides title='Top Rated Tv Show' url={Request.fetchTopRated} />
       <Slides title='Popular movies' url={Request.fetchPopularMovie} />
       <Slides title='Top Rated Movies' url={Request.fetchTopRatedMovies} />
-      {/* <Slides title='Upcoming Movies' url={Request.fetchUpcomingMovie} />
-      <Slides title='Trending' url={Request.fetchTrending} />
+      <Slides title='Upcoming Movies' url={Request.fetchUpcomingMovie} />
+      {/* <Slides title='Trending' url={Request.fetchTrending} /> */}
      
       <Slides title='New Release movies' url={Request.fetchNewReleaseMovie} />
       <Slides title='Popular Tv Shows' url={Request.fetchPopularTv} />
-      <Slides title='Action Tv Shows' url={Request.fetchActionTvShows} /> */}
+      <Slides title='Action Tv Shows' url={Request.fetchActionTvShows} />
       </>)}
     
     </div>

@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import {FaSearch} from "react-icons/fa";
-import { FaPlay } from "react-icons/fa"
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import mainpageContext from "../context/MainPageContext";
 import Search from "../components/Search";
 import '../css/Home.css'
-// import Slides from "../components/Slides";
-// import Banner from "../components/Banner";
+import Slides from "../components/Slides";
+import Banner from "../components/Banner";
 
 
 
@@ -36,24 +35,15 @@ const Kids = () => {
    }
 
 
-   const fetchBannerMovie = async ()=>{
-    fetch(`https://api.themoviedb.org/3/discover/tv?with_genres=10762&include_adult=false&sort_by=popularity.desc&api_key=${API_KEY}&include_video=true&page=5`)
-    .then(res =>{
-      return res.json()
-    })
-    .then(data =>{
-      setMovie(data.results[
-        Math.floor(Math.random()*data.results.length-1)
-    ])
-    console.log(movie);
-    })
-    .catch(err =>{
-      console.log(err);
-    })
-   }
+   const Request = {
+    KidsTrending: `/trending/tv/day?api_key=${API_KEY}&with_genres=10762&certification_country=US&certification=TV-Y`,
+    Kidsmovies: `/discover/movie?api_key=${API_KEY}&with_genres=16&certification_country=US&certification=TV-Y`
+  }
+
+  
   
    useEffect(()=>{
-    fetchBannerMovie()
+   
     window.addEventListener('scroll',transNav)
     return ()=>{
       window.removeEventListener('scroll',transNav)
@@ -62,7 +52,7 @@ const Kids = () => {
    }, [])
   
   
-   const location = useLocation();
+   const nav = useNavigate()
   
    
   
@@ -73,17 +63,8 @@ const Kids = () => {
   
 
 
-
-function truncateString(str, maxLength) {
-  if (str.length > maxLength) {
-    return str.slice(0, maxLength - 3) + '...';
-  }
-  return str;
-}
-
-
   return (
-    <div>
+    <div className="overflow-hidden bg-black h-full pb-4">
           <nav className="fixed left-0 top-0 z-10 ">
     <div className={`bg-gradient-to-b from-black to-transperate  ${show && 'bg-black'} w-screen 
     fixed flex text-white justify-between ease-in transition-all del
@@ -93,19 +74,16 @@ function truncateString(str, maxLength) {
       text-3xl font-bold
       text">NETFLIX</Link></div>
       <div>
-        <ul className="flex gap-5 items-center mt-2 text-sm">
+        <ul className="flex gap-5 items-center mt-2 text-xl">
           <li className={Active('/mainpage')}><Link to='/mainpage'
           className="hover:text-gray-400 hover:duration-300 ease-in
            delay-100"
           >Home</Link></li>
 
-          <li className={Active('/tvshow')}><Link to='/tvshows'
-          className="hover:text-gray-400 hover:duration-300 ease-in
-           delay-100 text-sm"
-          >Character</Link></li>
+        
 
           <li className={Active('/tvshow')}><Link to='/tvshows'
-          className="hover:text-gray-400 hover:duration-300 text-sm ease-in
+          className="hover:text-gray-400 hover:duration-300  ease-in
            delay-100"
           >TV Shows</Link></li>
 
@@ -153,7 +131,10 @@ function truncateString(str, maxLength) {
       </Link>
      </div>
       
-    <button className="bg-red-700 w-24 text-sm h-8 rounded hover:bg-red-900">
+    <button onClick={()=>{
+nav('/profile')
+    }} 
+    className="bg-red-700 w-24 text-sm h-8 rounded hover:bg-red-900">
         Exit Kids
     </button>
      </div>
@@ -162,52 +143,18 @@ function truncateString(str, maxLength) {
 
    {searchText !== '' ? <Search/> : (
       <>
-       <header style={{
-        backgroundImage: `url("https://image.tmdb.org/t/p/original${movie.backdrop_path}")`,
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
-        
-    }} className="object-contain banner">
+       <Banner banner={Request.KidsTrending}/>
 
-   
-   <div className=" text-white pt-40 ml-12 relative">
-
-    
-    <h1 className="
-    text-3xl font-bold
-    ">{movie?.title || movie?.name || movie?.original_name}</h1>
-
-
-    <div className="w-96 my-3">
-    <h1 className="
-    text-xl 
-    ">{truncateString(`${movie?.overview}`, 150)}</h1>
-    </div>
-
-    <div className="flex my-3">
-        <button className="bg-white w-32 text-black 
-        items-center flex justify-center text-xl h-12
-        rounded gap-3"><FaPlay/> Play</button>
-        <button className="bg-gray-500 w-40 text-white 
-        items-center flex justify-center text-xl h-12 font-bold
-        rounded gap-3 ml-3">My List</button>
-    </div>
-  
-  
-</div>
-<div className="w-screen faded"></div>
-   </header>
-
-      {/* <Slides title='Only on Netflix' url={Request.fetchNetflixOriginal} />
-      <Slides title='Top Rated Tv Show' url={Request.fetchTopRated} />
-      <Slides title='Popular movies' url={Request.fetchPopularMovie} />
-      <Slides title='Top Rated Movies' url={Request.fetchTopRatedMovies} />
-      <Slides title='Upcoming Movies' url={Request.fetchUpcomingMovie} />
-      <Slides title='Trending' url={Request.fetchTrending} />
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='2'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='3'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='5'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='6'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='7'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='8'/>
+      <Slides title=' tv shows for kids' url={Request.KidsTrending} page='4'/>
+      <Slides title=' tv shows for kids' url={Request.KidsTrending} page='5'/>
+      <Slides title='Hot Movies for kids' url={Request.Kidsmovies} page='9'/>
      
-      <Slides title='New Release movies' url={Request.fetchNewReleaseMovie} />
-      <Slides title='Popular Tv Shows' url={Request.fetchPopularTv} />
-      <Slides title='Action Tv Shows' url={Request.fetchActionTvShows} /> */}
       </>)}
     
 

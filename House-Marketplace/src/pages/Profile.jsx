@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import { getAuth, updateProfile} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import { updateDoc, doc} from 'firebase/firestore'
+import { updateDoc, doc, collection, getDocs, query, where,
+orderBy, deleteDoc} from 'firebase/firestore'
 import { db } from '../Firebase.config'
 import { async } from '@firebase/util'
 import {toast} from 'react-toastify'
 import { Link } from 'react-router-dom'
+import ListingItems from '../Components/ListingItems'
 const Profile = () => {
   
   const auth = getAuth()
 const nav = useNavigate()
+const [loading, setLoading]  = useState(true)
+const [listing, setListing] = useState(null)
   const [changeDetails, setChangeDetails] = useState(false)
   const [formData, setFormData] = useState({
   name: auth.currentUser.displayName,
@@ -17,6 +21,40 @@ const nav = useNavigate()
 })
 
 const {name, email} = formData
+
+
+useEffect(() => {
+  const fetchUserListings = async () => {
+    const listingsRef = collection(db, 'listings')
+
+    const q = query(
+      listingsRef,
+      where('userRef', '==', auth.currentUser.uid),
+      orderBy('timestamp', 'desc')
+    )
+
+    const querySnap = await getDocs(q)
+
+    let listings = []
+
+    querySnap.forEach((doc) => {
+      console.log(doc);
+      return listings.push({
+        id: doc.id,
+        data: doc.data(),
+      })
+    })
+    
+console.log(listings);
+    setListing(listings)
+    setLoading(false)
+  }
+
+  fetchUserListings()
+}, [auth.currentUser.uid])
+
+
+
 const onlogOut = () => {
 auth.signOut()
 nav('/')
@@ -91,6 +129,18 @@ setFormData((prev)=>({
  <path d="M0 0h24v24H0V0z" fill="none"/><path d="M8.59
  16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
   </Link>
+
+
+  {!loading && listing?.length> 0 && (
+    <>
+    <p className="listingText">Your Listings</p>
+    <ul className="listingList">
+      {listing.map((list)=>(
+<ListingItems key={list.id} listing={list.data} id={list.id}/>
+      ))}
+    </ul>
+    </>
+  )}
 </main>
   </div>
   )

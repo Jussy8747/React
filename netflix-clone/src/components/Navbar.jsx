@@ -123,15 +123,15 @@ signOut(auth)
        onChange={handleChange}/>
   </div>
       
-      <div onClick={hideSearch} className="absolute text-xl m-1 top-6"><FaSearch/></div>
+      <div onClick={hideSearch} className="absolute text-xl m-2 top-6"><FaSearch/></div>
      { 
-     searchText !== '' && (<div className="absolute right-48 text-xl top-6 font-bold">
+     searchText !== '' && (<div className="absolute right-48 text-xl m-1 top-6 font-bold">
      <button onClick={handleClick}>X</button> </div>)
      } 
       </div>) }
       
      {!showSearch && (
-         <button onClick={showsearch} className="text-xl"><FaSearch/></button>
+         <button onClick={showsearch} className="text-2xl"><FaSearch/></button>
      )}
       
 
@@ -148,24 +148,26 @@ signOut(auth)
         " src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="" />
     </button>
       </div>
-      <div className="bg-black border-spacing-4 w-40 mt-6 h-52 hidden absolute right-0 group-hover:block">
+      <div className="bg-black border-spacing-4 w-60 rounded h-auto hidden absolute right-0 group-hover:block">
       {profiles && (
           profiles.map(item=>(
-          <div onClick={item.name !== 'Kids' ? navigate : navToKids } key={item.name} className="flex fle-col hover:underline">
+          <div onClick={item.name !== 'Kids' ? navigate : navToKids } key={item.name} 
+          className="flex ml-3 hover:underline">
             <div className="mt-3">
-            <img className="w-8 h-full mx-2 rounded" src={item.img} alt="item.name" />
+            <img className="w-16 h-full mx-2 rounded" src={item.img} alt="item.name" />
             </div>
-            <h4 className="text-sm mt-5 ">{item.name}</h4>
+            <h4 className="text-2xl mt-5 ">{item.name}</h4>
           </div>
           ))
         )}
-        <hr className=" mt-4" />
-        <div className="ml-3 mt-3">
-        <div className="mb-3">
-        <Link to='/profile' className="hover:underline">Manage Profiles</Link>
+        <hr className=" mt-7" />
+        <div className=" mt-7 flex flex-col justify-between">
+        <div className="mb-2 ml-3">
+        <Link to='/profile' className="hover:underline text-2xl">Manage Profiles</Link>
         </div>
-        <div className="">
-        <button className="hover:underline" onClick={HandleSignOut}>Sign Out</button>
+        <hr className="mt-3" />
+        <div className="ml-3 mt-3 mb-3">
+        <button className="hover:underline text-2xl" onClick={HandleSignOut}>Sign Out</button>
         </div>
         
         </div>

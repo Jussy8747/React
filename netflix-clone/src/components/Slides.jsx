@@ -1,15 +1,11 @@
-import 'swiper/swiper-bundle.min.css';
-import { useContext, useEffect, useRef, useState} from 'react';
+
+import { useEffect, useRef, useState} from 'react';
 import '../css/slides.scss'
 import axios from 'axios';
 import Loading from './Loading';
-import SlidesItem from './SlidesItem';
-import { v4 as uuidv4 } from 'uuid';
-import {FaPlay, FaArrowDown, FaPlus} from 'react-icons/fa'
-
-const Slides = ({title, url}) => {
 
 
+const Slides = ({title, url, page}) => {
 
   const [movieItems, setMovieItems] = useState([])
   const [loading, setLoading] = useState(false)
@@ -20,7 +16,7 @@ const Slides = ({title, url}) => {
 useEffect(()=>{
   setLoading(true)
   const fetchItems = async () =>{
-     const req = await axios.get(`https://api.themoviedb.org/3${url}`)
+     const req = await axios.get(`https://api.themoviedb.org/3${url}&page=${page}`)
       setMovieItems(req.data.results)
   }
 setLoading(false)
@@ -40,23 +36,10 @@ const handleClick = (side) =>{
 if(side === 'right' && slideNum < Math.round(movieItems.length/5)){
   setSlideNum((prev)=> prev+1)
   setShowLeftSlide(true)
-
 }
-else if (side === 'left' && slideNum > 0) {
-  setSlideNum((prev)=> prev-1)
-  
+else if (side === 'left' && slideNum > 0)  setSlideNum((prev)=> prev-1)
 }
 
-
-
-}
-
-
-
-
-
-    
-    
     return (
       <>
 {loading ? (
@@ -64,31 +47,37 @@ else if (side === 'left' && slideNum > 0) {
 ) : (
   
   <div className=''>
-  <h1 className='text-white font-bold ml-16 p-2 text-2xl'>{title}</h1>
-  <div className=' flex justify-center group relative'>
+  <h1 className='text-white font-bold ml-16 p-2 pb-4 text-2xl'>{title}</h1>
+  <div className=' flex justify-center group'>
   {showLeftSlide && <div className='slideHanler left-0 
   group-hover:text-white text-8xl flex justify-center items-center 
   text-transparent font-light
   ' onClick={()=>handleClick('left')}> &#8249;</div>}
-      <div className='flex w-11/12 h-48' style={{ transform: `translateX(${slideNum * -100}%)` }}  ref={slideRef}> 
+   
+      <div className='flex w-11/12 h-52' style={{ transform: `translateX(${slideNum * -100}%)` }}  ref={slideRef}> 
       
      {movieItems.map((item, index) =>{
-     return ( <SlidesItem key={item.id}  item={item} id={index}/>)
+      
+return <img key={index} className='w-1/5 h-44 rounded-lg shrink-0 pl-1'
+style={{loading: 'lazy'}}
+src={`https://image.tmdb.org/t/p/original/${item.backdrop_path || item.poster_path
+}`} alt="item"  />
+ 
    })}
 
-   
+
 
      </div>
-    
-    <div className='slideHanler right-0
+     <div className='slideHanler right-0
        group-hover:text-white text-8xl flex justify-center items-center
        text-transparent font-light z-10
      ' onClick={()=>handleClick('right')}>&#8250;</div>
+
  
         </div>
        
  
-    
+       
      
    </div>
 )}

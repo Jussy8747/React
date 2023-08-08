@@ -12,8 +12,7 @@ const Banner = ({banner}) => {
 
   useEffect(()=>{
     fetchMovie(banner)
-   
-  }, [])
+  }, [banner])
 
   function truncateString(str, maxLength) {
     if (str.length > maxLength) {

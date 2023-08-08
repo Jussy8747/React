@@ -13,7 +13,7 @@ const SignIn = () => {
     email: '',
     password: ''
 })
-const {loading, setLoading} = useContext(mainpageContext)
+const {setLoading, loading}=useContext(mainpageContext)
 const emailRef = useRef()
 const passwordRef = useRef(null)
 
@@ -29,6 +29,7 @@ const onchange = ()=>{
   const {email, password} = text
 
 const nav = useNavigate()
+
 const clicked = (e) => {
   e.preventDefault()
 setLoading(true)
@@ -48,11 +49,9 @@ setLoading(true)
    
   setLoading(false)
 }
+return  loading ? <Loading/> :
 
-if(loading){
-  return <Loading/>
-}else{
-  return (
+  (
    
     <div className="bg h-screen bg-black">
        <ToastContainer />
@@ -70,12 +69,12 @@ if(loading){
           <input type="email" name='email' ref={emailRef} value={email}
         onChange={onchange} className='p-4 my-5 md:my-3 h-12 
         rounded md:mx-auto 
-           bg-gray-500 w-80 md:w-96' />
+           bg-gray-500 w-80 md:w-96' placeholder='Enter Email' />
           
         <input type="password" name='password' ref={passwordRef} value={password} 
         onChange={onchange} className='p-4 my-5 md:my-3 h-12 rounded
           md:mx-auto 
-           bg-gray-500 w-80 md:w-96' />
+           bg-gray-500 w-80 md:w-96' placeholder='Enter Password' />
     
        
         
@@ -95,7 +94,8 @@ if(loading){
         </div>
         </div>
         
-  )}
+  )
+
 }
 
 export default SignIn

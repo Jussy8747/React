@@ -7,13 +7,13 @@ import { setDoc, addDoc, collection, doc } from "firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import mainpageContext from "../context/MainPageContext";
-
+import Loading from "../components/Loading";
 const SignUp = () => {
   const [text, setText] = useState({
     email: '',
     password: ''
 })
-const {setLoading}=useContext(mainpageContext)
+const {setLoading, loading}=useContext(mainpageContext)
 const emailRef = useRef()
 const passwordRef = useRef(null)
 
@@ -66,7 +66,7 @@ setLoading(false)
 }
 
 
-  return (
+  return loading ? <Loading/> :(
 
     <>
       <div className="flex justify-between  border
@@ -81,7 +81,7 @@ setLoading(false)
       <h1 className="md:text-5xl text-3xl mb-8 font-bold">Create a password</h1>
       <form className="flex flex-col mt-16 md:mt-20">
         <input className="p-4 h-14 rounded 
-           w-80 md:w-96 border border-gray-300" placeholder="Email"
+           w-80 md:w-96 border border-gray-300" placeholder="Enter your Email"
             type="email" name="email" ref={emailRef} value={email}
              onChange={onchange} id="email" />
         <input className="mt-16 md:mt-8 p-4 my-3 h-14 rounded  

@@ -134,6 +134,7 @@ const handleChange = (e) =>{
     
     const handleClick = () =>{
       setSearchText('')
+      setShowSearch(false)
     }
     
     const showsearch = () =>{

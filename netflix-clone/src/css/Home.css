@@ -40,10 +40,27 @@ background-image: linear-gradient(
     #000
 );
 height: 7.4rem;
-margin-top: 82px;
+margin-top: 90px;
   }
 
 
+  @media (max-width: 768px) {
+    .home {
+        height: auto;
+        padding: 10px;
+    }
+
+    .banner {
+        height: 300px;
+    }
+
+    .faded {
+        margin-top: 60px;
+        height: 5rem;
+    }
+
+    /* Add more responsive adjustments here */
+}
 
 
 

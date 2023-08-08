@@ -1,4 +1,4 @@
-import MainContext from '../context/MainContext'
+
 import '../css/Home.css'
 import {  useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
