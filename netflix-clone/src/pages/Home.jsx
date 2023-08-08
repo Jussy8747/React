@@ -25,7 +25,7 @@ const nav = useNavigate()
             <Link to='/signin'>Sign In</Link>
         </div>
     </div>
-    <div className='mt-24 sm:mt-32 sm:ml-10'>
+    <div className='mt-24 sm:mt-32 sm:ml-10 ml-4'>
         <h1 className='text-3xl md:text-5xl font-bold'>
             Unlimited movies, TV shows, <br /> and more
         </h1>

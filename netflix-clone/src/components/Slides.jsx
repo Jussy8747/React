@@ -47,10 +47,10 @@ else if (side === 'left' && slideNum > 0)  setSlideNum((prev)=> prev-1)
 ) : (
   
   <div className=''>
-  <h1 className='text-white font-bold ml-16 p-2 pb-4 text-2xl'>{title}</h1>
-  <div className=' flex justify-center group'>
-  {showLeftSlide && <div className='slideHanler left-0 
-  group-hover:text-white text-8xl flex justify-center items-center 
+  <h1 className='text-white font-bold ml-2 sm:ml-16 p-1 sm:p-2 pb-4 text-xl sm:text-2xl'>{title}</h1>
+  <div className='flex justify-center group'>
+  {showLeftSlide && <div className='hidden sm:flex justify-center items-center slideHanler left-0 
+  group-hover:text-white text-8xl 
   text-transparent font-light
   ' onClick={()=>handleClick('left')}> &#8249;</div>}
    
@@ -58,7 +58,7 @@ else if (side === 'left' && slideNum > 0)  setSlideNum((prev)=> prev-1)
       
      {movieItems.map((item, index) =>{
       
-return <img key={index} className='w-1/5 h-44 rounded-lg shrink-0 pl-1'
+return <img key={index} className='w-2/6 sm:w-1/5 h-44 rounded-lg shrink-0 pl-1'
 style={{loading: 'lazy'}}
 src={`https://image.tmdb.org/t/p/original/${item.backdrop_path || item.poster_path
 }`} alt="item"  />
@@ -68,8 +68,8 @@ src={`https://image.tmdb.org/t/p/original/${item.backdrop_path || item.poster_pa
 
 
      </div>
-     <div className='slideHanler right-0
-       group-hover:text-white text-8xl flex justify-center items-center
+     <div className='hiddin sm:flex justify-center items-center slideHanler right-0
+       group-hover:text-white text-8xl
        text-transparent font-light z-10
      ' onClick={()=>handleClick('right')}>&#8250;</div>
 

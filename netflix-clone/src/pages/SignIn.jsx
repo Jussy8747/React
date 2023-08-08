@@ -56,37 +56,38 @@ return  loading ? <Loading/> :
     <div className="bg h-screen bg-black">
        <ToastContainer />
         <div className='font-bold '>
-            <h1 className='text p-4 text-2xl md:text-5xl'>NETFLIX</h1>
+            <h1 className='text p-4 text-2xl sm:text-5xl'>NETFLIX</h1>
         </div>
 
         <div className='signin-div 
-        pl-12 py-8 h-auto m-auto '>
+        sm:pl-12 pl-4 py-8 h-auto m-auto
+        '>
             <h1 className='text-white font-bold text-4xl my-10'>Sign In</h1>
        
         
         <div className='text-white'>
           <form>
           <input type="email" name='email' ref={emailRef} value={email}
-        onChange={onchange} className='p-4 my-5 md:my-3 h-12 
-        rounded md:mx-auto 
-           bg-gray-500 w-80 md:w-96' placeholder='Enter Email' />
+        onChange={onchange} className='p-4 my-5 sm:my-3 h-12 
+        rounded sm:mx-auto bg-white
+           sm:bg-gray-500 w-80 sm:w-96' placeholder='Enter Email' />
           
         <input type="password" name='password' ref={passwordRef} value={password} 
-        onChange={onchange} className='p-4 my-5 md:my-3 h-12 rounded
-          md:mx-auto 
-           bg-gray-500 w-80 md:w-96' placeholder='Enter Password' />
+        onChange={onchange} className='p-4 my-5 sm:my-3 h-12 rounded
+          sm:mx-auto bg-white
+           sm:bg-gray-500 w-80 sm:w-96' placeholder='Enter Password' />
     
        
         
-        <button onClick={clicked} className=' my-5 md:my-3 h-12 rounded  md:mx-auto 
-           input w-80 md:w-96 font-bold text-white text-lg p-3 bg-red-700'>Sign In</button>
+        <button onClick={clicked} className=' my-5 sm:my-3 h-12 rounded  sm:mx-auto 
+           input w-80 sm:w-96 font-bold text-white text-lg p-3 bg-red-700'>Sign In</button>
           </form>
         
         </div>
 
-        <div className='mt-10 md:mt-16 flex flex-col md:flex-row text-2xl'>
+        <div className='mt-10 sm:mt-16 flex sm:flex-row sm:text-2xl text-xl'>
             <p className='
-            text-gray-500 md:mr-3
+            text-gray-500 sm:mr-3
             '>New to Netflix? </p>
            
                 <Link to='/' className='text-white' >Sign up now.</Link>

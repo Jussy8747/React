@@ -69,15 +69,16 @@ setLoading(false)
   return loading ? <Loading/> :(
 
     <>
+    <ToastContainer />
       <div className="flex justify-between  border
-      p-5 border-gray-300 h-24 ">
-          <ToastContainer />
+      p-3 sm:p-5 border-gray-300 h-24 ">
+          
         <h1 className="text font-bold text-5xl">NETFLIX</h1>
         <Link to='/signin' className="text-2xl mt-2 font-bold">Sign In</Link>
       </div>
 
 
-    <div className="signin-div bg-white pl-12 py-12 md:py-8 h-auto m-auto ">
+    <div className="signin-div bg-white pl-6 sm:pl-12 py-12 md:py-8 h-auto m-auto ">
       <h1 className="md:text-5xl text-3xl mb-8 font-bold">Create a password</h1>
       <form className="flex flex-col mt-16 md:mt-20">
         <input className="p-4 h-14 rounded 

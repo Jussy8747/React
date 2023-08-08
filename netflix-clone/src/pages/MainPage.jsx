@@ -53,15 +53,15 @@ const MainPage = () => {
       <Banner banner={Request.fetchTrending}/>
 
       <Slides title='Only on Netflix' url={Request.fetchNetflixOriginal} />
-      <Slides title='Top Rated Tv Show' url={Request.fetchTopRated} />
+      {/* <Slides title='Top Rated Tv Show' url={Request.fetchTopRated} />
       <Slides title='Popular movies' url={Request.fetchPopularMovie} />
       <Slides title='Top Rated Movies' url={Request.fetchTopRatedMovies} />
       <Slides title='Upcoming Movies' url={Request.fetchUpcomingMovie} />
-      {/* <Slides title='Trending' url={Request.fetchTrending} /> */}
+      
      
       <Slides title='New Release movies' url={Request.fetchNewReleaseMovie} />
       <Slides title='Popular Tv Shows' url={Request.fetchPopularTv} />
-      <Slides title='Action Tv Shows' url={Request.fetchActionTvShows} />
+      <Slides title='Action Tv Shows' url={Request.fetchActionTvShows} /> */}
       </>)}
     
     </div>
